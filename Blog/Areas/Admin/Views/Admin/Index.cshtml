@@ -1,0 +1,24 @@
+﻿@using Blog.Areas.Admin.Models
+@model TopicVM
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Admin Panel:</h2>
+    <form action="" method="post">
+        <table>
+            <tr>
+                <td>Title</td>
+                <td>@Html.EditorFor(m => m.topic.Title)</td>
+            </tr>
+            <tr>
+                <td>Content</td>
+                <td>@Html.EditorFor(m => m.topic.Content)</td>
+            </tr>
+        </table>
+        <br>
+        @Html.ListBoxFor(model => model.SelectedTags,
+                                  new SelectList(Model.TagsPossible, "TagId", "TagWord"))
+        <br>
+        <input type="submit" value="Add topic" />
+    </form>

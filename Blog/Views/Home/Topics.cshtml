@@ -1,0 +1,14 @@
+﻿@using Models
+@model  IEnumerable<Topic>
+<h2>Topics:</h2>
+
+@foreach (Topic b in Model)
+{
+    <tr>
+        <td><h3><a href="/Home/Post/@b.TopicId">@b.Title<span>  on </span> @b.PublishDate</a></h3></td>
+    </tr>
+    <tr>
+        <td>@if (b.Content.Length <= 200) {@b.Content} else {@b.Content.Substring(0,200)}... <a href="/Home/Post/@b.TopicId">Read this article</a></td>
+    </tr>
+}
+ 

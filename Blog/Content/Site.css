@@ -1,0 +1,129 @@
+﻿body {
+    font-size: .85em;
+    font-family: "Times New Roman", Helvetica, Sans-Serif;
+    color: #232323;
+    background-color: #EEEEEE;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/* Styles for main body
+--------------------------------*/
+.rounded {
+    border-radius: 15px;
+}
+.text {
+    color: #330099;
+    line-height: 200%;
+}
+ul {
+    list-style-type: none;
+}
+a:link {
+    text-decoration: none;
+}
+a:visited {
+    color: #330099;
+}
+
+header {    
+    height: 100px;
+    width: 900px;
+    margin: auto;
+    padding: 20px;
+    background-color: #330099;
+    font-size: 600%;
+    color: #EEEEEE;
+    border-radius: 15%;
+}
+
+footer { 
+   width: 900px;
+   margin: auto;
+   padding-top: 20px;
+   position: absolute;
+   height: 40px;
+   bottom: 0;
+   text-align: center;
+}
+
+#main_body {
+    width: 940px;
+    margin: auto;
+    padding-top: 20px;
+    padding-left: 15px;
+}
+
+
+.content {
+    float: left;
+    width: 80%;
+}
+
+#right_sidebar {
+    Width: 20%;
+    float: left;
+}
+
+#Vote {
+    width: 95%;
+    height: 150px;
+    padding-top: 10px;
+    background-color: #330099;
+    color: #EEEEEE;
+    font-weight:bold;
+    text-align:center;
+}

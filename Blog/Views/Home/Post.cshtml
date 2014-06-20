@@ -1,0 +1,18 @@
+﻿@using Models
+@model Topic
+
+<h1>@Model.Title</h1>
+<h3>
+    @Model.PublishDate
+</h3>
+<br>
+<div>
+    @Model.Content
+</div>
+<br>
+<div class="text">
+    @foreach (Tag t in Model.Tags)
+    {
+    <span>#@t.TagWord</span>
+    }
+</div>

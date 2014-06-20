@@ -1,0 +1,21 @@
+﻿@using Models
+@model IEnumerable<Comment>
+
+<h2>Comments:</h2>
+
+@foreach (Comment b in Model)
+{
+    <tr>
+        <td><p><h3>@b.AuthorName</h3></p></td>
+        <td><p class="text">@b.PostedDate</p></td>
+        <td><p>@b.CommentText</p></td>
+    </tr>
+}
+<br>
+<form action="" method="post">
+    <p>Author</p>
+    <p><input type="text" name="AuthorName" /></p>
+    <p>Comment</p>
+    <p><input type="text" name="CommentText" /></p>
+    <input type="submit" value="Add new" />
+</form>
