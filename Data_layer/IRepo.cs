@@ -13,6 +13,7 @@ namespace Blog
         Topic GetTopic(int id);
         IEnumerable<Comment> GetComments();
         IEnumerable<Tag> GetAllTags();
+        Tag GetTagById(int id);
         void SetComment(Comment newCom);
         void SetTopic(Topic newTop);
         IEnumerable<Tag> GetTagsOfTopic(Topic topic);

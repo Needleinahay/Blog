@@ -35,6 +35,10 @@ namespace Blog.Context_Management
             IEnumerable<Tag> tags = context.Tags;
             return tags;
         }
+        public Tag GetTagById(int id)
+        {
+            return context.Tags.Find(id);
+        }
         public void SetComment(Comment newCom)
         {
             newCom.PostedDate = DateTime.Now;

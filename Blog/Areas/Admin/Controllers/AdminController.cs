@@ -20,11 +20,19 @@ namespace Blog.Areas.Admin.Controllers
         public ActionResult Index()
         {
             TopicVM toCreate = new TopicVM();
+            List<SelectListItem> tags = new List<SelectListItem>();
             foreach (Tag t in blogData.GetAllTags())
-            { 
-                //toCreate.TagsPossible.Add(t);
+            {
+                SelectListItem selectListItem = new SelectListItem()
+                {
+                    Value = t.TagId.ToString(),
+                    Text = t.TagWord.ToString(),
+                    Selected = false
+                };
+                tags.Add(selectListItem);
             }
-            return View(toCreate);//toCreate);
+            toCreate.TagsPossible = tags;
+            return View(toCreate);
         }
 
         [HttpPost]
@@ -32,8 +40,12 @@ namespace Blog.Areas.Admin.Controllers
         {
             Topic toSave = new Topic();
             toSave.Title = newTop.topic.Title;
-            toSave.Tags = newTop.topic.Tags;
             toSave.Content = newTop.topic.Content;
+            toSave.Tags = new List<Tag>();
+            foreach (string i in newTop.SelectedTags)
+            {
+                toSave.Tags.Add(blogData.GetTagById(Convert.ToInt32(i)));
+            }
             blogData.SetTopic(toSave);
             return RedirectToAction("Index");
         }

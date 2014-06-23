@@ -17,8 +17,8 @@
             </tr>
         </table>
         <br>
-        @Html.ListBoxFor(model => model.SelectedTags,
-                                  new SelectList(Model.TagsPossible, "TagId", "TagWord"))
+        @*Need to figure out how to set up default tag*@
+        @Html.ListBoxFor(model => model.SelectedTags, Model.TagsPossible) 
         <br>
         <input type="submit" value="Add topic" />
     </form>
