@@ -11,16 +11,24 @@ namespace Blog.Controllers
 {
     public class HomeController : Controller
     {
-        IRepo blogData;
+        BlogRepo blogData;
         public HomeController()
         {
             blogData = new BlogRepo(new BlogDbContext());
         }
 
         // Returns home page which includes link to topics' list
+        [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return View(blogData.GetVotes());
+        }
+
+        [HttpPost]
+        public ActionResult Index(Vote voted)
+        {
+            blogData.SetVote(voted.VoteId);
+            return View(blogData.GetVotes());
         }
 
         // Returns topics' list

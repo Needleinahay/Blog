@@ -11,7 +11,7 @@ namespace Blog.Areas.Admin.Controllers
 {
     public class AdminController : Controller
     {
-        IRepo blogData;
+        BlogRepo blogData;
         public AdminController ()
 	    {
             blogData = new BlogRepo(new BlogDbContext());

@@ -7,28 +7,37 @@ using System.Web;
 
 namespace Blog.Context_Management
 {  // This class creates  DB context object and provides with tools that push/retrieve data
-    public class BlogRepo : IRepo
+    public class BlogRepo : IRepo, ITag, IComment, ITopic, IVote
     {
         private BlogDbContext context;
-
         public BlogRepo(BlogDbContext db)
         {
             context = db;
         }
 
+        //----------------IRepo----------------------
         public IEnumerable<Topic> GetTopicsList()
         {
             IEnumerable<Topic> topics = context.Topics;
             return topics;
         }
+
+        //----------------ITopic----------------------
         public Topic GetTopic(int id)
         {
             return context.Topics.Find(id);
         }
-        public IEnumerable<Comment> GetComments()
+        public void SetTopic(Topic newTop)
         {
-            IEnumerable<Comment> comments = context.Comments;
-            return comments;
+            newTop.PublishDate = DateTime.Now;
+            context.Topics.Add(newTop);
+            context.SaveChanges();
+        }
+
+        //----------------ITag----------------------
+        public IEnumerable<Tag> GetTagsOfTopic(Topic topic)
+        {
+            return topic.Tags;
         }
         public IEnumerable<Tag> GetAllTags()
         {
@@ -39,22 +48,30 @@ namespace Blog.Context_Management
         {
             return context.Tags.Find(id);
         }
+
+        //----------------IComment----------------------
+        public IEnumerable<Comment> GetComments()
+        {
+            IEnumerable<Comment> comments = context.Comments;
+            return comments;
+        }
         public void SetComment(Comment newCom)
         {
             newCom.PostedDate = DateTime.Now;
             context.Comments.Add(newCom);
             context.SaveChanges();
         }
-        public void SetTopic(Topic newTop)
+
+        //----------------IVote----------------------
+        public IEnumerable<Vote> GetVotes()
         {
-            newTop.PublishDate = DateTime.Now;
-            context.Topics.Add(newTop);
+            return context.Votes;
+        }
+        public void SetVote(int voted)
+        {
+            context.Votes.Find(voted).Count++;
             context.SaveChanges();
         }
-
-        public IEnumerable<Tag> GetTagsOfTopic(Topic topic)
-        {
-            return topic.Tags;
-        }
+        
     }
 }

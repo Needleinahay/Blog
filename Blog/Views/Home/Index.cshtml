@@ -1,6 +1,5 @@
-﻿@{
-    ViewBag.Title = "This is the blog";
-}
+﻿@using Models
+@model  IEnumerable<Vote>
 <h2>
     Welcome to my blog!!!
 </h2>
@@ -10,9 +9,17 @@ Whould you please open the <a href="/Home/Topics">List of topics</a>
 @section Vote{
     <br />
     <div id="Vote" class="rounded">
-        <p><h3>Are you agree?</h3></p>
-        <p><input type="radio" name="YesNo"/>Yes!!!</p>
-        <p><input type="radio" name="YesNo"/>Not really</p>
+        @using (Html.BeginForm())
+        {
+            <p><h3>Are you agree?</h3></p>
+            foreach (Vote v in Model)
+            {
+                <p>@Html.RadioButtonFor(model => model.</p>
+                <p>@Html.RadioButton("yesno", v.VoteId) @v.Position</p>
+            }
+            <input type="submit" value="Vote" />
+        }
+        
 </div>
     
 }
