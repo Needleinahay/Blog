@@ -17,6 +17,7 @@ namespace Blog
         void SetComment(Comment newCom);
         void SetTopic(Topic newTop);
         IEnumerable<Tag> GetTagsOfTopic(Topic topic);
+        IEnumerable<TopicComment> GetCommentsOnTopic(Topic topic);
 
     }
 }

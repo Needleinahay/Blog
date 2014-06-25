@@ -23,7 +23,9 @@ namespace Blog.Context_Management
         }
         public Topic GetTopic(int id)
         {
-            return context.Topics.Find(id);
+            Topic toReturn = context.Topics.Find(id);
+            //toReturn.Comments = GetCommentsOnTopic(toReturn).ToList();
+            return toReturn;
         }
         public IEnumerable<Comment> GetComments()
         {
@@ -56,5 +58,14 @@ namespace Blog.Context_Management
         {
             return topic.Tags;
         }
+        public IEnumerable<TopicComment> GetCommentsOnTopic(Topic topic)
+        {
+            return topic.Comments;
+        }
+        //public void SetCommentOnTopic(CommentOnTopic com, int topicId)
+        //{
+        //    com.baseComment.PostedDate = DateTime.Now;
+        //    context.CommentsOnTopic.
+        //}
     }
 }

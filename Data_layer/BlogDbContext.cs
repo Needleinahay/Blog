@@ -13,6 +13,7 @@ namespace Blog
         public DbSet<Topic> Topics { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<TopicComment> CommentsOnTopic { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -22,6 +23,7 @@ namespace Blog
                 .Map(t => t.MapLeftKey("TopicID")
                     .MapRightKey("TagID")
                     .ToTable("TopicTag"));
+
         }
     }
 }

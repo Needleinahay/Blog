@@ -16,3 +16,8 @@
     <span>#@t.TagWord</span>
     }
 </div>
+<br>
+@foreach (CommentOnTopic c in Model.Comments)
+{
+    <p>@c.Comment.CommentText</p>
+}
