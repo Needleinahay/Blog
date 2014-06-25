@@ -24,7 +24,7 @@ namespace Blog.Context_Management
         public Topic GetTopic(int id)
         {
             Topic toReturn = context.Topics.Find(id);
-            //toReturn.Comments = GetCommentsOnTopic(toReturn).ToList();
+            toReturn.Comments = GetCommentsOnTopic(toReturn).ToList();
             return toReturn;
         }
         public IEnumerable<Comment> GetComments()
@@ -60,6 +60,12 @@ namespace Blog.Context_Management
         }
         public IEnumerable<TopicComment> GetCommentsOnTopic(Topic topic)
         {
+            // hope no one will find tihs crap
+            List<Comment> toBeComments = new List<Comment>();
+            foreach (TopicComment c in topic.Comments)
+            {
+                toBeComments.Add(context.Comments.Find(c.CommentId));
+            }
             return topic.Comments;
         }
         //public void SetCommentOnTopic(CommentOnTopic com, int topicId)
