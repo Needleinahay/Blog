@@ -17,19 +17,24 @@ namespace Blog.Controllers
             blogData = new BlogRepo(new BlogDbContext());
         }
 
-        // Returns home page which includes link to topics' list
-        // Returns form for voting
+        // Returns main page with a link on articles and voting bar 
+        // ViewModel is used to perform voting
         [HttpGet]
         public ActionResult Index()
         {
-            return View(blogData.GetVotes());
+            List<Vote> votes = blogData.GetVotes().ToList();
+            VoteVM votesToView = new VoteVM();
+            votesToView.votes = votes;
+
+            return View(votesToView);
         }
 
+        //Saves voting results
         [HttpPost]
-        public ActionResult Index(IEnumerable<Vote> votes)
+        public ActionResult Index(VoteVM v)
         {
-            //blogData.SetVote(voted.VoteId);
-            return View(blogData.GetVotes());
+            blogData.SetVote(v.selectedVote);
+            return RedirectToAction("Index");
         }
 
         // Returns topics' list

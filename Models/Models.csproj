@@ -49,6 +49,7 @@
     <Compile Include="Tag.cs" />
     <Compile Include="Topic.cs" />
     <Compile Include="Vote.cs" />
+    <Compile Include="VoteVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
