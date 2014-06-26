@@ -1,6 +1,5 @@
-﻿@{
-    ViewBag.Title = "This is the blog";
-}
+﻿@using Models
+@model  VoteVM
 <h2>
     Welcome to my blog!!!
 </h2>
@@ -10,9 +9,21 @@ Whould you please open the <a href="/Home/Topics">List of topics</a>
 @section Vote{
     <br />
     <div id="Vote" class="rounded">
-        <p><h3>Are you agree?</h3></p>
-        <p><input type="radio" name="YesNo"/>Yes!!!</p>
-        <p><input type="radio" name="YesNo"/>Not really</p>
-</div>
+        @using (Html.BeginForm())
+        {
+            <p><h3>Are you agree?</h3></p>
+            foreach (Vote v in Model.votes) 
+            { 
+                <p>@Html.RadioButtonFor(model => model.selectedVote, v.VoteId) @v.Position</p>
+            }
+            <input type="submit" value="Vote" />
+        }
+        
+    </div>
     
-}
+        @if (Model.votes[0].Count != 0 || Model.votes[1].Count != 0) 
+        { 
+            <p style="color:black; font-weight:bold; padding-left:10px" >@Model.votes[0].Count are agreed </p>
+            <p style="color:black; font-weight:bold; padding-left:10px">@Model.votes[1].Count are unsure </p>
+        }
+    }

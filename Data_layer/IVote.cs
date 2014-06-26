@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Blog.Context_Management;
+using System.Threading.Tasks;
 
 namespace Blog
 {
-    public interface IRepo
+    interface IVote
     {
-        IEnumerable<Topic> GetTopicsList();
+        IEnumerable<Vote> GetVotes();
+        void SetVote(int voted);
     }
 }

@@ -11,16 +11,30 @@ namespace Blog.Controllers
 {
     public class HomeController : Controller
     {
-        IRepo blogData;
+        BlogRepo blogData;
         public HomeController()
         {
             blogData = new BlogRepo(new BlogDbContext());
         }
 
-        // Returns home page which includes link to topics' list
+        // Returns main page with a link on articles and voting bar 
+        // ViewModel is used to perform voting
+        [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            List<Vote> votes = blogData.GetVotes().ToList();
+            VoteVM votesToView = new VoteVM();
+            votesToView.votes = votes;
+
+            return View(votesToView);
+        }
+
+        //Saves voting results
+        [HttpPost]
+        public ActionResult Index(VoteVM v)
+        {
+            blogData.SetVote(v.selectedVote);
+            return RedirectToAction("Index");
         }
 
         // Returns topics' list

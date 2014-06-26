@@ -13,7 +13,7 @@ namespace Blog
         public DbSet<Topic> Topics { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<TopicComment> CommentsOnTopic { get; set; }
+        public DbSet<Vote> Votes { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

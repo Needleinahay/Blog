@@ -11,7 +11,7 @@ namespace Blog.Areas.Admin.Controllers
 {
     public class AdminController : Controller
     {
-        IRepo blogData;
+        BlogRepo blogData;
         public AdminController ()
 	    {
             blogData = new BlogRepo(new BlogDbContext());
@@ -42,9 +42,16 @@ namespace Blog.Areas.Admin.Controllers
             toSave.Title = newTop.topic.Title;
             toSave.Content = newTop.topic.Content;
             toSave.Tags = new List<Tag>();
-            foreach (string i in newTop.SelectedTags)
+            if (newTop.SelectedTags == null)
             {
-                toSave.Tags.Add(blogData.GetTagById(Convert.ToInt32(i)));
+                toSave.Tags.Add(blogData.GetTagById(1));
+            }
+            else
+            {
+                foreach (string i in newTop.SelectedTags)
+                {
+                    toSave.Tags.Add(blogData.GetTagById(Convert.ToInt32(i)));
+                }
             }
             blogData.SetTopic(toSave);
             return RedirectToAction("Index");
