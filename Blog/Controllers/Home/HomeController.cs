@@ -18,6 +18,7 @@ namespace Blog.Controllers
         }
 
         // Returns home page which includes link to topics' list
+        // Returns form for voting
         [HttpGet]
         public ActionResult Index()
         {
@@ -25,9 +26,9 @@ namespace Blog.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(Vote voted)
+        public ActionResult Index(IEnumerable<Vote> votes)
         {
-            blogData.SetVote(voted.VoteId);
+            //blogData.SetVote(voted.VoteId);
             return View(blogData.GetVotes());
         }
 

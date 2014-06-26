@@ -12,10 +12,11 @@ Whould you please open the <a href="/Home/Topics">List of topics</a>
         @using (Html.BeginForm())
         {
             <p><h3>Are you agree?</h3></p>
+         // @Html.DisplayTextFor(model => model.
             foreach (Vote v in Model)
             {
-                <p>@Html.RadioButtonFor(model => model.</p>
-                <p>@Html.RadioButton("yesno", v.VoteId) @v.Position</p>
+                <p>@Html.RadioButtonFor(model => v.Position, )</p>
+                @*<p>@Html.RadioButton("yesno", v.VoteId) @v.Position</p>*@
             }
             <input type="submit" value="Vote" />
         }
