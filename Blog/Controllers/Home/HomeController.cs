@@ -36,11 +36,28 @@ namespace Blog.Controllers
             return View(blogData.GetTopic(Id));
         }
 
+
+        [HttpPost]
+        public ActionResult Post(Topic newCom)
+        {
+
+            return View();
+        }
+
         // Returns comments' list leaved by guests earlier
         [HttpGet]
         public ActionResult Comments()
         {
-            return View(blogData.GetComments());
+            List<Comment> toView = new List<Comment>();
+            IEnumerable<Comment> fromData = blogData.GetComments();
+            foreach (Comment c in fromData)
+            {
+                if (c.isGuestEntry == true)
+                {
+                    toView.Add(c);
+                }
+            }
+            return View(toView);
         }
 
         // adds new comment to DB
@@ -48,8 +65,9 @@ namespace Blog.Controllers
         public ActionResult Comments(Comment newCom)
         {
             newCom.PostedDate = DateTime.Now;
+            newCom.isGuestEntry = true;
             blogData.SetComment(newCom);
-            return View(blogData.GetComments());
+            return RedirectToAction("Comments");
         }
 
     }

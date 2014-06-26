@@ -19,5 +19,20 @@
 <br>
 @foreach (TopicComment c in Model.Comments)
 {
-    <p>@c.Comment.CommentText</p>
+    <tr>
+        <td><p><h3>@c.Comment.AuthorName</h3></p></td>
+        <td><p class="text">@c.Comment.PostedDate</p></td>
+        <td><p>@c.Comment.CommentText</p></td>
+    </tr>
 }
+<br>
+
+@*@Html.Partial("Partial1", Model.Comments)*@
+
+<form action="" method="post">
+    <p>Author</p>
+    <p><input type="text" name="Comments.Add(Comment.AuthorName)" /></p>
+    <p>Comment</p>
+    <p><input type="text" name="Comments.Comment.CommentText" /></p>
+    <input type="submit" value="Add new" />
+</form>

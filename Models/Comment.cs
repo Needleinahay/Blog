@@ -13,5 +13,6 @@ namespace Models
         public string AuthorName { get; set; }
         public DateTime PostedDate { get; set; }
 
+        public bool isGuestEntry { get; set; }
     }
 }
