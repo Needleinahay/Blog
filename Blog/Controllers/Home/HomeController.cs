@@ -54,8 +54,7 @@ namespace Blog.Controllers
         [HttpPost]
         public ActionResult Post(Topic newCom)
         {
-
-            return View();
+            return RedirectToAction("Post");
         }
 
         // Returns comments' list leaved by guests earlier
