@@ -41,15 +41,13 @@ namespace Blog.Areas.Admin.Controllers
             Topic toSave = new Topic();
             toSave.Title = newTop.topic.Title;
             toSave.Content = newTop.topic.Content;
-
+            toSave.Tags = new List<Tag>();
             if (newTop.SelectedTags == null)
             {
-                toSave.Tags = new List<Tag>();
                 toSave.Tags.Add(blogData.GetTagById(1));
             }
             else
             {
-                toSave.Tags = new List<Tag>();
                 foreach (string i in newTop.SelectedTags)
                 {
                     toSave.Tags.Add(blogData.GetTagById(Convert.ToInt32(i)));
