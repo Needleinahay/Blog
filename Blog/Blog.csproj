@@ -228,8 +228,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Topics.cshtml" />
     <Content Include="Views\Home\Post.cshtml" />
-    <Content Include="Views\Home\Comments.cshtml" />
     <Content Include="Views\Shared\Partial1.cshtml" />
+    <Content Include="Views\Home\Comments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

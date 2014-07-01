@@ -2,22 +2,37 @@
 @model TopicVM
 @{
     ViewBag.Title = "Index";
+    @Styles.Render("~/Content/css")
+    
 }
-
 <h2>Admin Panel:</h2>
-    <form action="" method="post">
-        <table>
-            <tr>
-                <td>Title</td>
-                <td>@Html.EditorFor(m => m.topic.Title)</td>
-            </tr>
-            <tr>
-                <td>Content</td>
-                <td>@Html.EditorFor(m => m.topic.Content)</td>
-            </tr>
-        </table>
+    
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <br>
+    <div class="editor-label">
+        @Html.LabelFor(model => model.topic.Title)
+    </div>
+    <div class="editor-field">
+        @Html.TextAreaFor(m => m.topic.Title, new { rows = 1, cols = 50 })
+        @Html.ValidationMessageFor(model => model.topic.Title)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.topic.Content)
+    </div>
+    <div class="editor-field">
+        @Html.TextAreaFor(m => m.topic.Content, new { rows = 20, cols = 50 })
+        @Html.ValidationMessageFor(model => model.topic.Content)
+    </div>
         <br>
-        @Html.ListBoxFor(model => model.SelectedTags, Model.TagsPossible)
+            @Html.ListBoxFor(model => model.SelectedTags, Model.TagsPossible)
         <br>
-        <input type="submit" value="Add topic" />
-    </form>
+    <p>
+        <input type="submit" value="Create" />
+    </p>
+}

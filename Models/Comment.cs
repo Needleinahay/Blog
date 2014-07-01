@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,7 +10,9 @@ namespace Models
     public class Comment
     {
         public int CommentId { get; set; }
+        [Required]
         public string CommentText { get; set; }
+        [Required]
         public string AuthorName { get; set; }
         public DateTime PostedDate { get; set; }
 

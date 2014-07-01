@@ -11,6 +11,7 @@ namespace Blog.Controllers
 {
     public class HomeController : Controller
     {
+        // repository instance
         BlogRepo blogData;
         public HomeController()
         {
@@ -18,7 +19,7 @@ namespace Blog.Controllers
         }
 
         // Returns main page with a link on articles and voting bar 
-        // ViewModel is used to perform voting
+        // View model is used to perform voting
         [HttpGet]
         public ActionResult Index()
         {
@@ -43,21 +44,35 @@ namespace Blog.Controllers
             return View(blogData.GetTopicsList());
         }
 
-        // Returns particular topic
+        // Returns particular topic on id
+        // View model is used in order to combine the topic and comments
         [HttpGet]
         public ActionResult Post(int Id)
         {
-            return View(blogData.GetTopic(Id));
+            TopicCommentVM toView = new TopicCommentVM();
+            toView.topic = blogData.GetTopic(Id);
+            return View(toView);
         }
 
-
+        // Adds new comment on topic
         [HttpPost]
-        public ActionResult Post(Topic newCom)
+        public ActionResult Post(TopicCommentVM newCom)
         {
-            return RedirectToAction("Post");
+            if (newCom.CommentToAdd.Comment.AuthorName != null && newCom.CommentToAdd.Comment.CommentText != null)
+            {
+                TopicComment toAdd = new TopicComment();
+                toAdd.Comment = newCom.CommentToAdd.Comment;
+                blogData.SetCommentOnTopic(toAdd, newCom.topic.TopicId);
+                return RedirectToAction("Post");
+            }
+            else
+            {
+                return RedirectToAction("Post");
+            }
+                
         }
 
-        // Returns comments' list leaved by guests earlier
+        // Returns guests' book page
         [HttpGet]
         public ActionResult Comments()
         {
@@ -70,17 +85,32 @@ namespace Blog.Controllers
                     toView.Add(c);
                 }
             }
-            return View(toView);
+            ViewBag.ExistingComments = toView;
+            return View();
         }
 
-        // adds new comment to DB
+        // adds new guest book entry (weird solution...)
         [HttpPost]
         public ActionResult Comments(Comment newCom)
         {
-            newCom.PostedDate = DateTime.Now;
-            newCom.isGuestEntry = true;
-            blogData.SetComment(newCom);
-            return RedirectToAction("Comments");
+            if (ModelState.IsValid)
+            {
+                newCom.PostedDate = DateTime.Now;
+                newCom.isGuestEntry = true;
+                blogData.SetComment(newCom);
+                return RedirectToAction("Comments");
+            }
+            List<Comment> toView = new List<Comment>();
+            IEnumerable<Comment> fromData = blogData.GetComments();
+            foreach (Comment c in fromData)
+            {
+                if (c.isGuestEntry == true)
+                {
+                    toView.Add(c);
+                }
+            }
+            ViewBag.ExistingComments = toView;
+            return View();
         }
 
     }

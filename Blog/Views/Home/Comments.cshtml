@@ -1,21 +1,41 @@
-﻿@using Models
-@model IEnumerable<Comment>
+﻿@model Models.Comment
 
-<h2>Comments:</h2>
-
-@foreach (Comment b in Model)
-{
-    <tr>
-        <td><p><h3>@b.AuthorName</h3></p></td>
-        <td><p class="text">@b.PostedDate</p></td>
-        <td><p>@b.CommentText</p></td>
-    </tr>
+@{
+    ViewBag.Title = "Comments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<br>
-<form action="" method="post">
-    <p>Author</p>
-    <p><input type="text" name="AuthorName" /></p>
-    <p>Comment</p>
-    <p><input type="text" name="CommentText" /></p>
-    <input type="submit" value="Add new" />
-</form>
+
+<h2>Comments</h2>
+
+@foreach (var item in ViewBag.ExistingComments)
+{          
+        <p><h4>@item.AuthorName</h4> @item.PostedDate</p>        
+        <p>@item.CommentText</p>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+        <br>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CommentText)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CommentText)
+            @Html.ValidationMessageFor(model => model.CommentText)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AuthorName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AuthorName)
+            @Html.ValidationMessageFor(model => model.AuthorName)
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+}
+

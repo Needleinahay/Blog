@@ -11,7 +11,7 @@ Whould you please open the <a href="/Home/Topics">List of topics</a>
     <div id="Vote" class="rounded">
         @using (Html.BeginForm())
         {
-            <p><h3>Are you agree?</h3></p>
+            <p><h3>Are you sure?</h3></p>
             foreach (Vote v in Model.votes) 
             { 
                 <p>@Html.RadioButtonFor(model => model.selectedVote, v.VoteId) @v.Position</p>

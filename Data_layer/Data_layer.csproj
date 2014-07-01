@@ -46,12 +46,8 @@
   <ItemGroup>
     <Compile Include="BlogDbContext.cs" />
     <Compile Include="BlogRepo.cs" />
-    <Compile Include="IComment.cs" />
     <Compile Include="DbInitialiser.cs" />
     <Compile Include="IRepo.cs" />
-    <Compile Include="ITags.cs" />
-    <Compile Include="ITopic.cs" />
-    <Compile Include="IVote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

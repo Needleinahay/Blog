@@ -1,23 +1,23 @@
 ﻿@using Models
-@model Topic
+@model TopicCommentVM
 
-<h1>@Model.Title</h1>
+<h1>@Model.topic.Title</h1>   
 <h3>
-    @Model.PublishDate
+    @Model.topic.PublishDate
 </h3>
 <br>
 <div>
-    @Model.Content
+    @Model.topic.Content
 </div>
 <br>
 <div class="text">
-    @foreach (Tag t in Model.Tags)
+    @foreach (Tag t in Model.topic.Tags)
     {
     <span>#@t.TagWord</span>
     }
 </div>
 <br>
-@foreach (TopicComment c in Model.Comments)
+@foreach (TopicComment c in Model.topic.Comments)
 {
     <tr>
         <td><p><h3>@c.Comment.AuthorName</h3></p></td>
@@ -27,12 +27,18 @@
 }
 <br>
 
-@*@Html.Partial("Partial1", Model.Comments)*@
 
-<form action="" method="post">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+    @Html.HiddenFor(model => model.topic.TopicId);
     <p>Author</p>
-    <p><input type="text" name="Comments.Add(Comment.AuthorName)" /></p>
+    @Html.EditorFor(model => model.CommentToAdd.Comment.AuthorName);
+    @Html.ValidationMessageFor(model => model.CommentToAdd.Comment.AuthorName)
     <p>Comment</p>
-    <p><input type="text" name="Comments.Comment.CommentText" /></p>
-    <input type="submit" value="Add new" />
-</form>
+    @Html.EditorFor(model => model.CommentToAdd.Comment.CommentText);
+    @Html.ValidationMessageFor(model => model.CommentToAdd.Comment.CommentText)
+    <p><input type="submit" value="Add new" /></p>
+}
